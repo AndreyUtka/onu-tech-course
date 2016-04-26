@@ -21,6 +21,7 @@ namespace LibraryDAL
         public string A_name { get; set; }
         public string aftername { get; set; }
         public string A_year { get; set; }
+        
         public DALBooksFromInfoAll()
         {
             B_id = null;
@@ -37,6 +38,7 @@ namespace LibraryDAL
             aftername = null;
             A_year = null;
         }
+        
         public DALBooksFromInfoAll(object[] input)
         {
             B_id = input[0].ToString();
@@ -53,6 +55,7 @@ namespace LibraryDAL
             aftername = input[11].ToString();
             A_year = input[12].ToString();
         }
+        
         public string[] GetColumns()
         {
             string[] names = { "b_id", "b_name", "b_year",

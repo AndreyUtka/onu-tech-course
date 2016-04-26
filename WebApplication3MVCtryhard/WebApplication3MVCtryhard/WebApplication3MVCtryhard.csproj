@@ -236,6 +236,8 @@
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\Home\View1.cshtml" />
     <Content Include="Views\Home\EditSingleBook.cshtml" />
+    <Content Include="Views\Home\AddBook.cshtml" />
+    <Content Include="Views\Home\SubmitBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
