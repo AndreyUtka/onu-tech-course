@@ -69,6 +69,18 @@ namespace WebApplication3MVCtryhard.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult SubmitBook(BLBooksFromInfoAll model)
+        {
+            // make data validation
+            bool succeded = HomeControllerManager.SubmitBook(model);
+            return View(succeded);
+        }
+
+        public ActionResult AddBook()
+        {
+            return View();
+        }
 
         public ActionResult EditSingleBook()
         {

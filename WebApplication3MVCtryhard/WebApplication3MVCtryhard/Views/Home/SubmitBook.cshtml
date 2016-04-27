@@ -1,0 +1,16 @@
+﻿@model bool
+@{
+    ViewBag.Title = "SubmitBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>SubmitBook</h2>
+@{if (Model)
+  {
+    <span>SUCCESS</span>
+  }
+  else
+  {
+    <span>FAIL</span>
+  }
+}

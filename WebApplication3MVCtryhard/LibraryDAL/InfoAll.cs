@@ -53,5 +53,48 @@ namespace LibraryDAL
 
             return books;
         }
+
+        public static bool SubmitBook(object[] arr)
+        {
+            DALBooksFromInfoAll bookToSubmit = new DALBooksFromInfoAll(arr);
+            NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
+            dbconn.Open();
+            NpgsqlCommand com;
+            //NpgsqlDataReader reader;
+
+            com = new NpgsqlCommand(
+                String.Format("INSERT INTO book(name,year,janre,izd,numofpages,howmanytimes,number_s1) VALUES('{0}',{1},'{2}','{3}',{4},{5},{6});",
+                bookToSubmit.B_name, bookToSubmit.B_year, bookToSubmit.Janre, bookToSubmit.Izd,
+                bookToSubmit.Numofpages, bookToSubmit.Howmanytimes, bookToSubmit.Number_s1)
+                , dbconn);
+            int executed = Convert.ToInt32(com.ExecuteScalar());
+            if (executed == 0)
+            {
+                com = new NpgsqlCommand("SELECT MAX(id) FROM book", dbconn);
+                bookToSubmit.B_id = Convert.ToInt32(com.ExecuteScalar()).ToString();
+                com = new NpgsqlCommand(
+                 String.Format("INSERT INTO author(surname, name, aftername, year) VALUES('{0}','{1}','{2}',{3});",
+                bookToSubmit.Surname, bookToSubmit.A_name, bookToSubmit.aftername, bookToSubmit.A_year)
+                 , dbconn);
+                executed = Convert.ToInt32(com.ExecuteScalar()); 
+            }
+            if (executed == 0)
+            {
+                com = new NpgsqlCommand("SELECT MAX(id) FROM author", dbconn);
+                bookToSubmit.A_id = Convert.ToInt32(com.ExecuteScalar()).ToString();
+                com = new NpgsqlCommand(
+                 String.Format("INSERT INTO authority VALUES({0},{1});",
+                bookToSubmit.B_id, bookToSubmit.A_id)
+                 , dbconn);
+                executed = Convert.ToInt32(com.ExecuteScalar());
+                if (executed == 0)
+                    executed = 3;
+            }
+            bool succeded = false;
+            if (executed == 3)
+                succeded = true;
+            dbconn.Close();
+            return succeded;
+        }
     }
 }

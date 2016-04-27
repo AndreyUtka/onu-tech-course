@@ -1,0 +1,88 @@
+﻿@model BLBooksFromInfoAll
+@using LibraryBL;
+@{
+    ViewBag.Title = "AddBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>AddBook</h2>
+@using (Html.BeginForm("SubmitBook", "Home", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                book name
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.B_name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book year
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.B_year)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book janre
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Janre)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book izdanie
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Izd)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book number of pages
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Numofpages)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book how many times was given
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Howmanytimes)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                book number of shelf
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Number_s1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                author fullname (FIO)
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.A_fullname)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                author year
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.A_year)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input id="Submit1" type="submit" value="submit" /></td>
+        </tr>
+    </table>
+}
