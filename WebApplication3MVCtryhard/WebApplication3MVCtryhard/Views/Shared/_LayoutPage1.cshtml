@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        #leftMenu {
+            width: 20%;
+            float: left;
+        }
+        #content{
+            width: 80%;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="leftMenu">
+        @Html.ActionLink("Home", "Index", "Home")
+        <br />
+        @Html.ActionLink("Add/Remove Books", "AddRemoveBooks", "Home")  
+    </div>
+    <div id="content">
+        @RenderBody()
+    </div>
+</body>
+</html>
