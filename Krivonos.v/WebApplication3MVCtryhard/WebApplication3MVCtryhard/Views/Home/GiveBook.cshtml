@@ -1,0 +1,64 @@
+﻿@model DataTable
+@using System.Data;
+@{
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div>
+    <h3>Вы можете выдать эти книги</h3>
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <th>@col.ColumnName</th>
+                }
+                @if (Model.Columns.Count != 1)
+                {
+                    <th> Выдать книгу </th>
+                }
+            </tr>
+        </thead>
+        @{
+            string ID = "-1";
+            if (Model.Columns.Count != 1)
+            {
+                ID = Model.Rows[Model.Rows.Count - 1][0].ToString();
+            }
+                
+        }
+        <tbody>
+
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+                DataRow row = Model.Rows[i];
+                if (i == Model.Rows.Count - 1)
+                {
+                }
+                else
+                {
+                    <tr>
+                        @foreach (DataColumn col in Model.Columns)
+                        {
+                            <td>@row[col.ColumnName]</td>
+                        }
+                        @if (Model.Columns.Count != 1)
+                            {
+                        <td>
+                                @Html.ActionLink("Выдать эту книгу", "GiveCertainBook", "Home", new { bid = @row[0], rid = ID }, null)
+                            
+                        </td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @*@foreach (WebApplication3MVCtryhard.Models.Book b in model)
+        {
+            <tr>
+                <td><p>@b.Id</p></td>
+                <td><p>@b.Name</p></td>
+            </tr>
+        }*@
+
+</div>

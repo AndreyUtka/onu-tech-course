@@ -1,0 +1,16 @@
+﻿@model bool
+@{
+    ViewBag.Title = "RemoveSingleBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Результат удаления</h2>
+@{if (Model)
+    {
+        <span>Удаление успешно!</span>
+    }
+  else
+  {
+    <span>Удаление провалено</span>
+  }
+}

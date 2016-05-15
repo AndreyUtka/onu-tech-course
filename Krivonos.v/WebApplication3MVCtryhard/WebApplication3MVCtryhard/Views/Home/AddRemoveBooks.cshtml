@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title = "AddRemoveBooks";
+    ViewBag.Title = "Add/Remove Books";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>AddRemoveBooks</h2>
-@Html.ActionLink("Add", "AddBook", "Home") 
+<h2>Добавить/Удалить Книги</h2>
+@Html.ActionLink("Добавить", "AddBook", "Home") 
+<br />
+@Html.ActionLink("Удалить", "RemoveBook", "Home") 
  

@@ -1,0 +1,51 @@
+﻿@model LibraryBL.BLReader
+
+@{
+    ViewBag.Title = "AddReader";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>AddReader</h2>
+
+@using (Html.BeginForm("AddReaderPost", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BLReader</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Surname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Surname)
+            @Html.ValidationMessageFor(model => model.Surname)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AfterName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AfterName)
+            @Html.ValidationMessageFor(model => model.AfterName)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

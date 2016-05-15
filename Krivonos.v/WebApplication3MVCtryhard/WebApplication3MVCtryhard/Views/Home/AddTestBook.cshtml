@@ -1,0 +1,65 @@
+﻿@model WebApplication3MVCtryhard.Models.UIBooksFromInfoAll
+
+@{
+    ViewBag.Title = "AddTestBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>AddTestBook</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Id)
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Year)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Janre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Janre)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Izd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Izd)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Numofpages)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Numofpages)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Howmanytimes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Howmanytimes)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Number_s1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Number_s1)
+    </div>
+    
+    @Html.EditorFor(m => m.Authors) <br />
+    <input type="submit" />
+}

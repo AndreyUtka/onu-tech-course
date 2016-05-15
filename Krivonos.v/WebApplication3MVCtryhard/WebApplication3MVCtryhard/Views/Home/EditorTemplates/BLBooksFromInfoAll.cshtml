@@ -1,0 +1,28 @@
+﻿@model BLBooksFromInfoAll
+@using LibraryBL
+@{
+    ViewBag.Title = "UIBooksFromInfoAll";
+   
+}
+
+@*<h2>UIBooksFromInfoAll</h2>*@
+
+
+    @*<legend>UIBooksFromInfoAll</legend>*@
+    @Html.HiddenFor(m => m.Id)
+    
+        @Html.HiddenFor(model => model.Name)
+    
+        @Html.HiddenFor(model => model.Year)
+   
+        @Html.HiddenFor(model => model.Janre)
+
+   
+        @Html.HiddenFor(model => model.Izd)
+
+        @Html.HiddenFor(model => model.Howmanytimes)    
+        @Html.HiddenFor(model => model.Numofpages)
+    
+    
+        @Html.HiddenFor(model => model.Number_s1)
+    @Html.EditorFor(model => model.Authors)

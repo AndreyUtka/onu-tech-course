@@ -1,20 +1,24 @@
-﻿@model BLBooksFromInfoAll
-@using LibraryBL;
+﻿@model LibraryBL.BLBooksFromInfoAll
+
 @{
     ViewBag.Title = "AddBook";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
 <h2>AddBook</h2>
-@using (Html.BeginForm("SubmitBook", "Home", FormMethod.Post))
+@using (Html.BeginForm("AddAuthorForBook", "Home", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
     <table>
         <tr>
             <td>
                 book name
             </td>
             <td>
-                @Html.TextBoxFor(m => m.B_name)
+                @Html.EditorFor(m => m.Name)
+                @Html.ValidationMessageFor(model => model.Name)
             </td>
         </tr>
         <tr>
@@ -22,7 +26,8 @@
                 book year
             </td>
             <td>
-                @Html.TextBoxFor(m => m.B_year)
+                @Html.EditorFor(m => m.Year)
+                @Html.ValidationMessageFor(model => model.Year)
             </td>
         </tr>
         <tr>
@@ -30,7 +35,8 @@
                 book janre
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Janre)
+                @Html.EditorFor(m => m.Janre)
+                @Html.ValidationMessageFor(model => model.Janre)
             </td>
         </tr>
         <tr>
@@ -38,7 +44,8 @@
                 book izdanie
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Izd)
+                @Html.EditorFor(m => m.Izd)
+                @Html.ValidationMessageFor(model => model.Izd)
             </td>
         </tr>
         <tr>
@@ -46,7 +53,8 @@
                 book number of pages
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Numofpages)
+                @Html.EditorFor(m => m.Numofpages)
+                @Html.ValidationMessageFor(model => model.Numofpages)
             </td>
         </tr>
         <tr>
@@ -54,7 +62,8 @@
                 book how many times was given
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Howmanytimes)
+                @Html.EditorFor(m => m.Howmanytimes)
+                @Html.ValidationMessageFor(model => model.Howmanytimes)
             </td>
         </tr>
         <tr>
@@ -62,10 +71,11 @@
                 book number of shelf
             </td>
             <td>
-                @Html.TextBoxFor(m => m.Number_s1)
+                @Html.EditorFor(m => m.Number_s1)
+                @Html.ValidationMessageFor(model => model.Number_s1)
             </td>
         </tr>
-        <tr>
+        @*<tr>
             <td>
                 author fullname (FIO)
             </td>
@@ -80,9 +90,30 @@
             <td>
                 @Html.TextBoxFor(m => m.A_year)
             </td>
+        </tr>*@
+        <tr>
+            <td>
+                Enter number of authors
+            </td>
+            <td>
+                @Html.EditorFor(m => m.NumberOfAuthors)
+                @Html.ValidationMessageFor(model => model.NumberOfAuthors)
+            </td>
         </tr>
         <tr>
-            <td colspan="2"><input id="Submit1" type="submit" value="submit" /></td>
+            <td colspan="2"><input id="Submit1" type="submit" value="Add Authors for this book" /></td>
         </tr>
     </table>
 }
+
+@section Scripts {
+<script src="/Scripts/jquery-1.8.2.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}
+
+
+
+
+
+   

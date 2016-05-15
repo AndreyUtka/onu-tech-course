@@ -1,0 +1,45 @@
+﻿@model DataTable
+@using System.Data;
+@{
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div>
+    <h3>Читатели</h3>
+    <br />
+    @Html.ActionLink("Добавить читателя", "AddReader", "Home")
+    <br />
+    <table>
+        <thead>
+            <tr>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <th>@col.ColumnName</th>
+                }
+                <th> Удалить Читателя </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Rows)
+            {
+                <tr>
+                    @foreach (DataColumn col in Model.Columns)
+                    {
+                        <td>@row[col.ColumnName]</td>
+                    }
+                    <td>
+                        @Html.ActionLink("Удалить", "RemoveReader", "Home", new { rid = @row[0] }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*@foreach (WebApplication3MVCtryhard.Models.Book b in model)
+        {
+            <tr>
+                <td><p>@b.Id</p></td>
+                <td><p>@b.Name</p></td>
+            </tr>
+        }*@
+
+</div>
+

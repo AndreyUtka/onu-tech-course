@@ -19,6 +19,18 @@ namespace LibraryBL
             }
             return Books;
         }
+
+        public static List<BLBooksFromInfoAll> GetDataForReaders()
+        {
+            List<DALBooksFromInfoAll> BooksFromInfoAll = LibraryDAL.InfoAll.GetInfoForReaders();
+            List<BLBooksFromInfoAll> Books = new List<BLBooksFromInfoAll>();
+            foreach (DALBooksFromInfoAll b in BooksFromInfoAll)
+            {
+                Books.Add(new BLBooksFromInfoAll(b));
+            }
+            return Books;
+        }
+
         /*
           public DALBooksFromInfoAll(object[] input)
         {
@@ -39,25 +51,82 @@ namespace LibraryBL
          */
         public static bool SubmitBook(BLBooksFromInfoAll submittedbook)
         {
-            submittedbook.B_id = "";
-            submittedbook.A_id = "";
-            int space = submittedbook.A_fullname.IndexOf(' ');
-            string fullname = submittedbook.A_fullname;
-            string[] fullnamesplit = fullname.Split(' ');
-            string a_surname = fullnamesplit[0];
-            string a_name = fullnamesplit[1];
-            string a_aftername = "";
-            if (fullnamesplit.Length > 2)
-                a_aftername = fullnamesplit[2];
-            
-            object[] arr = {
-                            submittedbook.B_id, submittedbook.B_name, submittedbook.B_year,
+            submittedbook.Id = "";
+            object[] book = {
+                                submittedbook.Id, submittedbook.Name, submittedbook.Year,
                             submittedbook.Janre, submittedbook.Izd, submittedbook.Numofpages,
-                            submittedbook.Howmanytimes, submittedbook.Number_s1, submittedbook.A_id,
-                            a_surname, a_name, a_aftername, submittedbook.A_year
-                           };
-            bool succeded = InfoAll.SubmitBook(arr);
+                            submittedbook.Howmanytimes, submittedbook.Number_s1
+                            };
+            object[][] authors = new object[submittedbook.Authors.Count][];
+
+            for (int i = 0; i < submittedbook.Authors.Count; i++ )
+            {
+                string fullname = submittedbook.Authors[i].Fullname;
+                string[] fullnamesplit = fullname.Split(' ');
+                string surname = fullnamesplit[0];
+                string name = fullnamesplit[1];
+                string aftername = "";
+                string year = submittedbook.Authors[i].Year;
+                if (fullnamesplit.Length > 2)
+                    aftername = fullnamesplit[2];
+                object[] author = {
+                                    "", surname, name, aftername, year
+                                  };
+                authors[i] = author;
+            }
+
+
+            bool succeded = InfoAll.SubmitBook(book, authors);
             return succeded;
+        }
+
+        public static bool RemoveBook(int bid)
+        {
+            return InfoAll.RemoveBookWithId(bid);
+        }
+
+        public static List<BLReader> GetAllReaders()
+        {
+            List<BLReader> BLreaders = new List<BLReader>();
+            List < DALReader > DALreaders = InfoAll.GetAllReaders(); 
+            foreach (DALReader r in DALreaders)
+            {
+                BLreaders.Add(new BLReader(r));                
+            }
+            return BLreaders;
+        }
+
+        public static bool GiveBookToReader(int bid, int rid)
+        {
+            bool result = InfoAll.GiveBookToReader(bid, rid);
+            return result;
+        }
+
+        public static bool HasBookOnHands(int rid)
+        {
+            return InfoAll.HasBookOnHands(rid);
+        }
+
+        public static bool TakeBook(int bid)
+        {
+            return InfoAll.TakeBookFromReader(bid);
+        }
+
+        public static BLBooksFromInfoAll GetBookBookOnHandsForReader(int rid)
+        {
+            BLBooksFromInfoAll book = new BLBooksFromInfoAll(InfoAll.GetBookBookOnHandsForReader(rid));
+            return book;
+        }
+
+        public static bool RemoveReader(int rid)
+        {
+            return InfoAll.RemoveReader(rid);
+        }
+
+        public static bool AddReader(BLReader submittedReader)
+        {
+            object[] newReader = {submittedReader.Surname, submittedReader.Name, submittedReader.AfterName};
+            return InfoAll.AddReader(newReader);
         }
     }
 }

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DALBooksFromInfoAll.cs" />
+    <Compile Include="DALReader.cs" />
     <Compile Include="InfoAll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,7 +12,7 @@
                     {
                         <th>@col.ColumnName</th>
                     }
-                    <th> EDIT </th>
+                    <th> Детальнее </th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                             <td>@row[col.ColumnName]</td>
                         }
                         <td>                           
-                            @*@Html.ActionLink("Edit", "EditSingleBook", "Home", new { bid = @row[0] }, null)*@
+                            @Html.ActionLink("Детальнее", "SingleBook", "Home", new { bid = @row[0] }, null)
                         </td>
                     </tr>
                 }

@@ -3,60 +3,111 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using LibraryDAL;
 
 namespace LibraryBL
 {
+    public class BLAuthor
+    {
+        public string Id { get; set; }
+        public string Fullname { get; set; }
+        public string Year { get; set; }
+
+        public BLAuthor()
+        {
+            Id = null;
+            Fullname = null;
+            Year = null;
+        }
+        public BLAuthor(DALAuthor input)
+        {
+            Id = input.Id;
+            Year = input.Year;
+            Fullname = input.Surname + ' ' + input.Name + ' ' + input.Aftername;
+        }
+    }
     public class BLBooksFromInfoAll
     {
-        public string B_id { get; set; }
-        public string B_name { get; set; }
-        public string B_year { get; set; }
+        public string Id { get; set; }
+
+        [Required(ErrorMessage="NEED NAME")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "NEED Year")]
+        public string Year { get; set; }
+
+        [Required(ErrorMessage = "NEED Janre")]
         public string Janre { get; set; }
+
+        [Required(ErrorMessage = "NEED Izd")]
         public string Izd { get; set; }
+
+        [Required(ErrorMessage = "NEED Numofpages")]
         public string Numofpages { get; set; }
+
+        [Required(ErrorMessage = "NEED Howmanytimes")]
         public string Howmanytimes { get; set; }
+
+        [Required(ErrorMessage = "NEED Number_s1")]
         public string Number_s1 { get; set; }
-        public string A_id { get; set; }
+        
+        private int numberOfAuthors;
+
+        [Required(ErrorMessage = "NEED NumberOfAuthors")]
+        public int NumberOfAuthors
+        {
+            get
+            {
+                return numberOfAuthors;
+            }
+            set
+            {
+                numberOfAuthors = value;
+            }
+        }
+        public List<BLAuthor> Authors { get; set; }
         //public string Surname { get; set; }
         //public string A_name { get; set; }
         //public string aftername { get; set; }
-        public string A_fullname { get; set; }
-        public string A_year { get; set; }
+        
         public BLBooksFromInfoAll()
         {
-            B_id = null;
-            B_name = null;
-            B_year = null;
+            Id = null;
+            Name = null;
+            Year = null;
             Janre = null;
             Izd = null;
             Numofpages = null;
             Howmanytimes = null;
             Number_s1 = null;
-            A_id = null;
-            A_fullname = null;
-            A_year = null;
+            Authors = new List<BLAuthor>();
         }
         public BLBooksFromInfoAll(DALBooksFromInfoAll input)
         {
-            B_id = input.B_id;
-            B_name = input.B_name;
-            B_year = input.B_year;
+            Id = input.Id;
+            Name = input.Name;
+            Year = input.Year;
             Janre = input.Janre;
             Izd = input.Izd;
             Numofpages = input.Numofpages;
             Howmanytimes = input.Howmanytimes;
             Number_s1 = input.Number_s1;
-            A_id = input.A_id;
-            A_fullname = input.Surname + " " + input.A_name + " " + input.aftername;
-            A_year = input.A_year;
+            Authors = new List<BLAuthor>();
+            foreach (DALAuthor dalAuthor in input.Authors)
+            {
+                Authors.Add(new BLAuthor(dalAuthor));
+            }
+            //    A_id = input.A_id;
+            //    A_fullname = input.Surname + " " + input.A_name + " " + input.aftername;
+            //    A_year = input.A_year;
         }
         public string[] GetColumns()
         {
             string[] names = { "b_id", "b_name", "b_year",
                                  "janre", "izd", "numofpages",
                                  "howmanytimes", "number_s1",
-                                 "a_id", "fullname", "a_year" };
+                             };
             return names;        
         }
     }

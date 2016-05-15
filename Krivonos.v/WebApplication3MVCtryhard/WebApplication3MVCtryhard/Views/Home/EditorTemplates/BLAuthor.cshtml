@@ -1,0 +1,17 @@
+﻿@model BLAuthor
+@using LibraryBL
+@{
+    //ViewBag.Title = "UIAuthor";
+}
+
+@*<h2>UIAuthor</h2>*@
+@Html.HiddenFor(m => m.Id)
+<tr>
+    <td>
+        @Html.TextBoxFor(m => m.Fullname)
+    </td>
+    <td>
+@Html.TextBoxFor(m => m.Year)
+    </td>
+</tr>
+

@@ -2,62 +2,101 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 using LibraryBL;
 
 namespace WebApplication3MVCtryhard.Models
 {
+    public class UIAuthor
+    {
+        public string Id { get; set; }
+        public string Fullname { get; set; }
+        public string Year { get; set; }
+
+        public UIAuthor()
+        {
+            Id = null;
+            Fullname = null;
+            Year = null;
+        }
+
+        public UIAuthor (BLAuthor blAuthor)
+        {
+            Id = blAuthor.Id;
+            Fullname = blAuthor.Fullname;
+            Year = blAuthor.Year;
+        }
+
+        public string[] GetColumns()
+        {
+            string[] columns = { "ID", "Полное Имя", "Год Рождения" };
+            return columns;
+        }
+    }
     public class UIBooksFromInfoAll
     {
-        public string B_id { get; set; }
-        public string B_name { get; set; }
-        public string B_year { get; set; }
+        public string Id { get; set; }
+        
+
+        public string Name { get; set; }
+        public string Year { get; set; }
         public string Janre { get; set; }
         public string Izd { get; set; }
         public string Numofpages { get; set; }
         public string Howmanytimes { get; set; }
         public string Number_s1 { get; set; }
-        public string A_id { get; set; }
-        public string A_fullname { get; set; }
-        public string A_year { get; set; }
+        private int numberOfAuthors;
+        public int NumberOfAuthors { 
+            get
+                {
+                    return numberOfAuthors;
+                }
+            set 
+                {
+                    numberOfAuthors = value;
+                }
+        }
+        public List<UIAuthor> Authors { get; set; }
+
         public UIBooksFromInfoAll()
         {
-            B_id = null;
-            B_name = null;
-            B_year = null;
+            Id = null;
+            Name = null;
+            Year = null;
             Janre = null;
             Izd = null;
             Numofpages = null;
             Howmanytimes = null;
             Number_s1 = null;
-            A_id = null;
-            A_fullname = null;
-            A_year = null;
+            Authors = new List<UIAuthor>();
         }
         public UIBooksFromInfoAll(BLBooksFromInfoAll input)
         {
-            B_id = input.B_id;
-            B_name = input.B_name;
-            B_year = input.B_year;
+            Id = input.Id;
+            Name = input.Name;
+            Year = input.Year;
             Janre = input.Janre;
             Izd = input.Izd;
             Numofpages = input.Numofpages;
             Howmanytimes = input.Howmanytimes;
             Number_s1 = input.Number_s1;
-            A_id = input.A_id;
-            A_fullname = input.A_fullname;
-            A_year = input.A_year;
+            Authors = new List<UIAuthor>();
+            foreach (BLAuthor blAuthor in input.Authors)
+            {
+                Authors.Add(new UIAuthor(blAuthor));
+            }
         }
         public string[] GetColumns()
         {
-            string[] names = { "b_id", "b_name", "b_year",
-                                 "janre", "izd", "numofpages",
-                                 "howmanytimes", "number_s1",
-                                 "a_id", "fullname", "a_year" };
+            string[] names = { "ID", "Название", "Год издания",
+                                 "Жанр", "Издание", "Кол-во страниц",
+                                 "Сколько раз брали", "Номер полки", "Кол-во авторов"
+                                 };
             return names;        
         }
         public object[] GetValues()
         {
-            object[] values = { B_id, B_name, B_year, Janre, Izd, Numofpages, Howmanytimes, Number_s1, A_id, A_fullname, A_year };
+            object[] values = { Id, Name, Year, Janre, Izd, Numofpages, Howmanytimes, Number_s1, Authors.Count };
             return values;
         }
     }

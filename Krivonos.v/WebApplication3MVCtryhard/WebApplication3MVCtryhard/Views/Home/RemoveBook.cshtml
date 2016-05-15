@@ -1,0 +1,42 @@
+﻿@model DataTable
+@using System.Data;
+@{
+    ViewBag.Title = "Remove Book";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Remove Book</h2>
+<h3>Книги в Библиотеке</h3>
+<table>
+    <thead>
+        <tr>
+            @foreach (DataColumn col in Model.Columns)
+            {
+                <th>@col.ColumnName</th>
+            }
+            <th> Удалить </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                @foreach (DataColumn col in Model.Columns)
+                {
+                    <td>@row[col.ColumnName]</td>
+                }
+                <td>
+                    @Html.ActionLink("Удалить", "RemoveSingleBook", "Home", new { bid = @row[0] }, new { onclick = "return confirm('Вы уверенны?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*@foreach (WebApplication3MVCtryhard.Models.Book b in model)
+    {
+        <tr>
+            <td><p>@b.Id</p></td>
+            <td><p>@b.Name</p></td>
+        </tr>
+    }*@
+
