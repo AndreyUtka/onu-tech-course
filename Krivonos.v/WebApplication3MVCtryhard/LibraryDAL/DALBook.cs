@@ -15,7 +15,7 @@ namespace LibraryDAL
         public string Year { get; set; }
     }
 
-    public class DALBooksFromInfoAll
+    public class DALBook
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -27,7 +27,7 @@ namespace LibraryDAL
         public string Number_s1 { get; set; }
         public List<DALAuthor> Authors { get; set; }
         
-        public DALBooksFromInfoAll()
+        public DALBook()
         {
             Id = null;
             Name = null;
@@ -45,7 +45,7 @@ namespace LibraryDAL
             //A_year = null;
         }
         
-        public DALBooksFromInfoAll(object[] input)
+        public DALBook(object[] input)
         {
             Id = input[0].ToString();
             Name = input[1].ToString();
@@ -63,7 +63,7 @@ namespace LibraryDAL
             //A_year = input[12].ToString();
         }
 
-        public DALBooksFromInfoAll(object[] book, object[][] authors)
+        public DALBook(object[] book, object[][] authors)
         {
             Id = book[0].ToString();
             Name = book[1].ToString();

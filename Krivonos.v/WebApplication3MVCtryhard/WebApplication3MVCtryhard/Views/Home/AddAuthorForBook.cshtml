@@ -1,18 +1,27 @@
-﻿@model LibraryBL.BLBooksFromInfoAll
+﻿@model LibraryBL.BLBook
 @using LibraryBL;
 
 @{
     ViewBag.Title = "AddAuthorForBook";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
+<script type="text/javascript">
+    $(document).ready(function(){
+        if(@Model.Authors.Count == 0)
+        {
+            $("#SubmitBook").click();
+        }
+    });
+</script>
+<table>
+    @{if (Model.Authors.Count != 0)
+    {
 
-
-    <table>
-    <tr>
-        <td>
-            For this book @Model.Name , @Model.Year , add authors or submit the book:
-        </td>
-    </tr>
+        <tr>
+            <td>
+                For this book @Model.Name , @Model.Year , add authors or submit the book:
+            </td>
+        </tr>
         <tr>
             <td>
                 <h3>Authors</h3>
@@ -26,38 +35,46 @@
                 Year
             </td>
         </tr>
+    }
+    }
 
-    @*@foreach (BLAuthor author in Model.Authors)
+    @using (Html.BeginForm("SubmitBook", "Home", FormMethod.Post))
     {
+        @*@Html.HiddenFor(m => m)*@
+        @Html.HiddenFor(m => m.Name)
+        @Html.HiddenFor(m => m.Year)
+        @Html.HiddenFor(m => m.Janre)
+        @Html.HiddenFor(m => m.Izd)
+        @Html.HiddenFor(m => m.Numofpages)
+        @Html.HiddenFor(m => m.Howmanytimes)
+        @Html.HiddenFor(m => m.Number_s1)
+        @Html.HiddenFor(m => m.NumberOfAuthors)
+        for (int i = 0; i < Model.Authors.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m.Authors[i].Fullname)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Authors[i].Year)
+                </td>
+            </tr>
+        }
         <tr>
-            <td>
-                @author.Fullname
-            </td>
-            <td>
-                @author.Year
-            </td>
+            <td colspan="2"><input id="SubmitBook" onload="ifelseclick()" type="submit" value="Submit Book" /></td>
         </tr>
-    }*@
-        
-       
-            @using (Html.BeginForm("SubmitBook", "Home", FormMethod.Post))
-            {
-                @Html.EditorFor(m => m)
-                <tr>
-                    <td colspan="2"><input id="SubmitBook" type="submit" value="Submit Book" /></td>
-                </tr>
-            }
-            @*@using (Html.BeginForm("AddBook", "Home", FormMethod.Post))
-            {
-                <tr>
-                    <td colspan="2"><input id="SubmitForm" type="submit" value="submit" /></td>
-                </tr>
+    }
+    @*@using (Html.BeginForm("AddBook", "Home", FormMethod.Post))
+        {
+            <tr>
+                <td colspan="2"><input id="SubmitForm" type="submit" value="submit" /></td>
+            </tr>
 
-            }*@
+        }*@
 </table>
 @*<form>
-    @Html.ActionLink("Add Author", "AddSingleAuthorForBook", Model)
-</form>*@
+        @Html.ActionLink("Add Author", "AddSingleAuthorForBook", Model)
+    </form>*@
 
 
 

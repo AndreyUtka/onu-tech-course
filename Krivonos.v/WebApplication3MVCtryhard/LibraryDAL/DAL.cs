@@ -9,9 +9,9 @@ using System.Configuration;
 
 namespace LibraryDAL
 {
-    public class InfoAll
+    public class DAL
     {
-        public static DALBooksFromInfoAll[] GetInfo()
+        public DALBook[] GetAllBooks()
         {
             // NpgsqlConnection dbconn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["HomeLibrary"].ConnectionString);
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
@@ -32,7 +32,7 @@ namespace LibraryDAL
             
             com = new NpgsqlCommand("SELECT * FROM booksinlibrary", dbconn);
 
-            DALBooksFromInfoAll[] books = new DALBooksFromInfoAll[iteratormax];
+            DALBook[] books = new DALBook[iteratormax];
             reader = com.ExecuteReader();
             int iterator = 0;
             while (iterator < iteratormax)
@@ -41,13 +41,13 @@ namespace LibraryDAL
                 object[] newrow = new object[reader.FieldCount];
                 for (int i = 0; i < reader.FieldCount; i++)
                     newrow[i] = reader.GetString(i);
-                books[iterator] = new DALBooksFromInfoAll(newrow);
+                books[iterator] = new DALBook(newrow);
                 //dtAll.Rows.Add(newrow);
                 iterator++;
             }
             reader.Close();
 
-            foreach (DALBooksFromInfoAll book in books)
+            foreach (DALBook book in books)
             {
                 com = new NpgsqlCommand("SELECT id_a FROM authority WHERE id_b = @bid", dbconn);
                 com.Parameters.AddWithValue("@bid", Convert.ToInt32(book.Id));
@@ -80,14 +80,14 @@ namespace LibraryDAL
             return books;
         }
 
-        public static List<DALBooksFromInfoAll> GetInfoForReaders()
+        public List<DALBook> GetBooksForReaders()
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
             NpgsqlCommand com;
             NpgsqlDataReader reader;
 
-            List<DALBooksFromInfoAll> books = new List<DALBooksFromInfoAll>();
+            List<DALBook> books = new List<DALBook>();
 
             com = new NpgsqlCommand("SELECT * FROM booksinlibrary WHERE b_id NOT IN (SELECT id_b FROM givenbooks)", dbconn);
             reader = com.ExecuteReader();
@@ -97,7 +97,7 @@ namespace LibraryDAL
                 object[] newrow = new object[reader.FieldCount];
                 for (int i = 0; i < reader.FieldCount; i++)
                     newrow[i] = reader.GetString(i);
-                books.Add(new DALBooksFromInfoAll(newrow));
+                books.Add(new DALBook(newrow));
             }
             reader.Close();
 
@@ -106,9 +106,9 @@ namespace LibraryDAL
             return books;
         }
 
-        public static bool SubmitBook(object[] book, object[][] authors)
+        public bool SubmitBook(object[] book, object[][] authors)
         {
-            DALBooksFromInfoAll bookToSubmit = new DALBooksFromInfoAll(book, authors);
+            DALBook bookToSubmit = new DALBook(book, authors);
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
             NpgsqlCommand com;
@@ -162,7 +162,7 @@ namespace LibraryDAL
             return succeded;
         }
 
-        public static bool RemoveBookWithId(int bid)
+        public bool RemoveBookWithId(int bid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -212,7 +212,7 @@ namespace LibraryDAL
                 return false;
         }
 
-        public static List<DALReader> GetAllReaders()
+        public List<DALReader> GetAllReaders()
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -240,7 +240,7 @@ namespace LibraryDAL
             return readers;
         }
 
-        public static bool GiveBookToReader(int bid, int rid)
+        public bool GiveBookToReader(int bid, int rid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -258,7 +258,7 @@ namespace LibraryDAL
             return Convert.ToBoolean(succeded);
         }
 
-        public static bool HasBookOnHands(int rid)
+        public bool HasBookOnHands(int rid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -272,14 +272,14 @@ namespace LibraryDAL
                 return true;
         }
 
-        public static DALBooksFromInfoAll GetBookBookOnHandsForReader(int rid)
+        public DALBook GetBookBookOnHandsForReader(int rid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
             NpgsqlCommand com;
             NpgsqlDataReader reader;
 
-            DALBooksFromInfoAll book = null;
+            DALBook book = null;
             com = new NpgsqlCommand("SELECT * FROM booksinlibrary WHERE b_id IN (SELECT id_b FROM givenbooks WHERE id_r = @rid)", dbconn);
             com.Parameters.AddWithValue("@rid", rid);
             reader = com.ExecuteReader();
@@ -289,7 +289,7 @@ namespace LibraryDAL
                 object[] newrow = new object[reader.FieldCount];
                 for (int i = 0; i < reader.FieldCount; i++)
                     newrow[i] = reader.GetString(i);
-                book = new DALBooksFromInfoAll(newrow);
+                book = new DALBook(newrow);
             }
             reader.Close();
 
@@ -298,7 +298,7 @@ namespace LibraryDAL
             return book;
         }
 
-        public static bool TakeBookFromReader(int bid)
+        public bool TakeBookFromReader(int bid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -309,7 +309,7 @@ namespace LibraryDAL
             return Convert.ToBoolean(succeded);
         }
 
-        public static bool RemoveReader(int rid)
+        public bool RemoveReader(int rid)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();
@@ -321,7 +321,7 @@ namespace LibraryDAL
             return Convert.ToBoolean(succeded);
         }
 
-        public static bool AddReader(object[] newReader)
+        public bool AddReader(object[] newReader)
         {
             NpgsqlConnection dbconn = new NpgsqlConnection("Server=127.0.0.1;User Id=postgres;Password=12345;Port=5433;Database=Home Library;");
             dbconn.Open();

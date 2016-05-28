@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLBooksFromInfoAll.cs" />
+    <Compile Include="BLBook.cs" />
     <Compile Include="BLReader.cs" />
-    <Compile Include="HomeControllerManager.cs" />
+    <Compile Include="BookRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReaderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library.config" />

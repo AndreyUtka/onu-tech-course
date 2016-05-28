@@ -27,7 +27,7 @@ namespace LibraryBL
             Fullname = input.Surname + ' ' + input.Name + ' ' + input.Aftername;
         }
     }
-    public class BLBooksFromInfoAll
+    public class BLBook
     {
         public string Id { get; set; }
 
@@ -71,7 +71,7 @@ namespace LibraryBL
         //public string A_name { get; set; }
         //public string aftername { get; set; }
         
-        public BLBooksFromInfoAll()
+        public BLBook()
         {
             Id = null;
             Name = null;
@@ -83,7 +83,7 @@ namespace LibraryBL
             Number_s1 = null;
             Authors = new List<BLAuthor>();
         }
-        public BLBooksFromInfoAll(DALBooksFromInfoAll input)
+        public BLBook(DALBook input)
         {
             Id = input.Id;
             Name = input.Name;

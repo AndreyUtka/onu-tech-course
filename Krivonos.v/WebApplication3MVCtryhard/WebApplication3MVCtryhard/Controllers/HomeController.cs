@@ -13,7 +13,8 @@ namespace WebApplication3MVCtryhard.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private BookRepository bookRepository = new BookRepository();
+        private ReaderRepository readerRepository = new ReaderRepository();
         //
         // GET: /Home/
         //BookContext db = new BookContext();
@@ -30,14 +31,14 @@ namespace WebApplication3MVCtryhard.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitBook(BLBooksFromInfoAll model)
+        public ActionResult SubmitBook(BLBook model)
         {
             // make data validation
-            bool succeded = HomeControllerManager.SubmitBook(model);
+            bool succeded = bookRepository.SubmitBook(model);
             return View(succeded);
         }
 
-        public ActionResult AddAuthorForBook(BLBooksFromInfoAll model)
+        public ActionResult AddAuthorForBook(BLBook model)
         {
             for (int i = 0; i < model.NumberOfAuthors; i++)
             {
@@ -49,7 +50,7 @@ namespace WebApplication3MVCtryhard.Controllers
             return View(model);
         }
 
-        public ActionResult AddTestBook(BLBooksFromInfoAll model)
+        public ActionResult AddTestBook(BLBook model)
         {
             for (int i = 0; i < model.NumberOfAuthors; i++)
             {
@@ -61,21 +62,7 @@ namespace WebApplication3MVCtryhard.Controllers
                 return View(model);
         }
 
-        public ActionResult AddSingleAuthorForBook(UIBooksFromInfoAll book)
-        {
-            UIAuthor a = new UIAuthor();
-            book.Authors.Add(a);
-            // make data validation
-            // bool succeded = HomeControllerManager.SubmitBook(model);
-            return View(book);
-        }    
-
         public ActionResult AddBook()
-        {
-            return View();
-        }
-
-        public ActionResult AddBook3()
         {
             return View();
         }
@@ -87,7 +74,7 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult RemoveSingleBook(int bid)
         {
-            bool succeded = HomeControllerManager.RemoveBook(bid);
+            bool succeded = bookRepository.RemoveBook(bid);
             return View(succeded);
         }
 
@@ -130,9 +117,9 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult SingleBook(string bid)
         {
-            List<BLBooksFromInfoAll> BLBooks = HomeControllerManager.GetData();
+            List<BLBook> BLBooks = bookRepository.GetAllBooks();
             List<UIBooksFromInfoAll> UIBooks = new List<UIBooksFromInfoAll>();
-            foreach (BLBooksFromInfoAll b in BLBooks)
+            foreach (BLBook b in BLBooks)
             {
                 UIBooks.Add(new UIBooksFromInfoAll(b));
             }
@@ -156,7 +143,7 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult Readers()
         {
-            List<BLReader> BLreaders = HomeControllerManager.GetAllReaders();
+            List<BLReader> BLreaders = bookRepository.GetAllReaders();
             List<UIReader> UIreaders = new List<UIReader>();
             foreach (BLReader r in BLreaders)
             {
@@ -178,7 +165,7 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult RemoveReader(int rid)
         {
-            bool succeded = HomeControllerManager.RemoveReader(rid);
+            bool succeded = readerRepository.RemoveReader(rid);
             return View(succeded);
         }
 
@@ -190,14 +177,14 @@ namespace WebApplication3MVCtryhard.Controllers
         [HttpPost]
         public ActionResult AddReaderPost(BLReader model)
         {
-            bool succeded = HomeControllerManager.AddReader(model);
+            bool succeded = readerRepository.AddReader(model);
             return View(succeded);
         }
 
         public ActionResult GiveBook(int Id)
         {
             DataTable dtAll;
-            if (HomeControllerManager.HasBookOnHands(Id))
+            if (readerRepository.HasBookOnHands(Id))
             {
                 dtAll = new DataTable();
                 dtAll.Columns.Add("Этому читателю уже была выдана книга!");
@@ -213,13 +200,13 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult GiveCertainBook(int bid, int rid)
         {
-            bool result = HomeControllerManager.GiveBookToReader(bid, rid);
+            bool result = bookRepository.GiveBookToReader(bid, rid);
             return View(result);
         }
 
         public ActionResult TakeBook(int Id)
         {
-            BLBooksFromInfoAll BLBook = HomeControllerManager.GetBookBookOnHandsForReader(Id);
+            BLBook BLBook = readerRepository.GetBookBookOnHandsForReader(Id);
             UIBooksFromInfoAll UIBook = new UIBooksFromInfoAll(BLBook);
             
             DataTable dtAll = new DataTable();
@@ -235,9 +222,9 @@ namespace WebApplication3MVCtryhard.Controllers
 
         private DataTable AllBooks()
         {
-            List<BLBooksFromInfoAll> BLBooks = HomeControllerManager.GetData();
+            List<BLBook> BLBooks = bookRepository.GetAllBooks();
             List<UIBooksFromInfoAll> UIBooks = new List<UIBooksFromInfoAll>();
-            foreach (BLBooksFromInfoAll b in BLBooks)
+            foreach (BLBook b in BLBooks)
             {
                 UIBooks.Add(new UIBooksFromInfoAll(b));
             }
@@ -253,9 +240,9 @@ namespace WebApplication3MVCtryhard.Controllers
 
         private DataTable AllBooksForReaders()
         {
-            List<BLBooksFromInfoAll> BLBooks = HomeControllerManager.GetDataForReaders();
+            List<BLBook> BLBooks = bookRepository.GetBooksForReaders();
             List<UIBooksFromInfoAll> UIBooks = new List<UIBooksFromInfoAll>();
-            foreach (BLBooksFromInfoAll b in BLBooks)
+            foreach (BLBook b in BLBooks)
             {
                 UIBooks.Add(new UIBooksFromInfoAll(b));
             }
@@ -271,7 +258,7 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult GiveOrTakeBook(int Id)
         {
-            if (HomeControllerManager.HasBookOnHands(Id))
+            if (readerRepository.HasBookOnHands(Id))
             {
                 //Response.Redirect("~/Home/TakeBook/"+Id);
                 return RedirectToAction("TakeBook", new { Id = Id });
@@ -285,7 +272,7 @@ namespace WebApplication3MVCtryhard.Controllers
 
         public ActionResult TakeCertainBook(int bid)
         {
-            bool succeded = HomeControllerManager.TakeBook(bid);
+            bool succeded = bookRepository.TakeBook(bid);
             return View(succeded);
         }
     }

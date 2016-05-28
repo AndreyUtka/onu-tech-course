@@ -70,7 +70,7 @@ namespace WebApplication3MVCtryhard.Models
             Number_s1 = null;
             Authors = new List<UIAuthor>();
         }
-        public UIBooksFromInfoAll(BLBooksFromInfoAll input)
+        public UIBooksFromInfoAll(BLBook input)
         {
             Id = input.Id;
             Name = input.Name;

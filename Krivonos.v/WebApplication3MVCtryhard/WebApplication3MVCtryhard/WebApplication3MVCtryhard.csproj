@@ -243,12 +243,10 @@
     <Content Include="Views\Home\RemoveSingleBook.cshtml" />
     <Content Include="Views\Home\SingleBook.cshtml" />
     <Content Include="Views\Home\AddAuthorForBook.cshtml" />
-    <Content Include="Views\Home\AddSingleAuthorForBook.cshtml" />
+    <Content Include="Views\Home\AddAuthorForBook2.cshtml" />
     <Content Include="Views\Home\EditorTemplates\BLBooksFromInfoAll.cshtml" />
     <Content Include="Views\Home\AddTestBook.cshtml" />
     <Content Include="Views\Home\EditorTemplates\BLAuthor.cshtml" />
-    <Content Include="Views\Home\AddBook2.cshtml" />
-    <Content Include="Views\Home\AddBook3.cshtml" />
     <Content Include="Views\Home\Readers.cshtml" />
     <Content Include="Views\Home\GiveBook.cshtml" />
     <Content Include="Views\Home\GiveCertainBook.cshtml" />
