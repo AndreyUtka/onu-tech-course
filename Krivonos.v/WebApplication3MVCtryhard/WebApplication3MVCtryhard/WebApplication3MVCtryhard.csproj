@@ -235,17 +235,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\AddRemoveBooks.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
-    <Content Include="Views\Home\View1.cshtml" />
-    <Content Include="Views\Home\EditSingleBook.cshtml" />
     <Content Include="Views\Home\AddBook.cshtml" />
     <Content Include="Views\Home\SubmitBook.cshtml" />
     <Content Include="Views\Home\RemoveBook.cshtml" />
     <Content Include="Views\Home\RemoveSingleBook.cshtml" />
     <Content Include="Views\Home\SingleBook.cshtml" />
     <Content Include="Views\Home\AddAuthorForBook.cshtml" />
-    <Content Include="Views\Home\AddAuthorForBook2.cshtml" />
     <Content Include="Views\Home\EditorTemplates\BLBooksFromInfoAll.cshtml" />
-    <Content Include="Views\Home\AddTestBook.cshtml" />
     <Content Include="Views\Home\EditorTemplates\BLAuthor.cshtml" />
     <Content Include="Views\Home\Readers.cshtml" />
     <Content Include="Views\Home\GiveBook.cshtml" />
@@ -257,6 +253,10 @@
     <Content Include="Views\Home\RemoveReader.cshtml" />
     <Content Include="Views\Home\AddReader.cshtml" />
     <Content Include="Views\Home\AddReaderPost.cshtml" />
+    <Content Include="Views\Home\SearchForBook.cshtml" />
+    <Content Include="Views\Home\SearchForBookWithParams.cshtml" />
+    <Content Include="Views\Home\EditBookWithId.cshtml" />
+    <Content Include="Views\Home\SaveBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

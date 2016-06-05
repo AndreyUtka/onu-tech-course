@@ -10,14 +10,14 @@ namespace WebApplication3MVCtryhard.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string AfterName { get; set; }
+        public string Patronymic { get; set; }
 
         public UIReader()
         {
             Id = null;
             Name = null;
             Surname = null;
-            AfterName = null;
+            Patronymic = null;
         }
 
         public UIReader(LibraryBL.BLReader input)
@@ -25,7 +25,7 @@ namespace WebApplication3MVCtryhard.Models
             Id = input.Id;
             Name = input.Name;
             Surname = input.Surname;
-            AfterName = input.AfterName;
+            Patronymic = input.Patronymic;
         }
 
         public string[] GetColumns()
@@ -35,7 +35,7 @@ namespace WebApplication3MVCtryhard.Models
 
         public object[] GetValues()
         {
-            return new object[] { Id, Name, Surname, AfterName };
+            return new object[] { Id, Name, Surname, Patronymic };
         }
     }
 }

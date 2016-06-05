@@ -5,115 +5,106 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>AddBook</h2>
 @using (Html.BeginForm("AddAuthorForBook", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
-    <table>
-        <tr>
-            <td>
-                book name
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book year
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Year)
-                @Html.ValidationMessageFor(model => model.Year)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book janre
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Janre)
-                @Html.ValidationMessageFor(model => model.Janre)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book izdanie
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Izd)
-                @Html.ValidationMessageFor(model => model.Izd)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book number of pages
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Numofpages)
-                @Html.ValidationMessageFor(model => model.Numofpages)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book how many times was given
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Howmanytimes)
-                @Html.ValidationMessageFor(model => model.Howmanytimes)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                book number of shelf
-            </td>
-            <td>
-                @Html.EditorFor(m => m.Number_s1)
-                @Html.ValidationMessageFor(model => model.Number_s1)
-            </td>
-        </tr>
-        @*<tr>
-            <td>
-                author fullname (FIO)
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.A_fullname)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                author year
-            </td>
-            <td>
-                @Html.TextBoxFor(m => m.A_year)
-            </td>
-        </tr>*@
-        <tr>
-            <td>
-                Enter number of authors
-            </td>
-            <td>
-                @Html.EditorFor(m => m.NumberOfAuthors)
-                @Html.ValidationMessageFor(model => model.NumberOfAuthors)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input id="Submit1" type="submit" value="Add Authors for this book" /></td>
-        </tr>
-    </table>
+    <fieldset>
+        <legend>Книга</legend>
+        <table>
+            <tr>
+                <td>
+                    Название Книги
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Год Издания Книги
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Year)
+                    @Html.ValidationMessageFor(model => model.Year)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Жанры
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.StringOfJanres)
+                    @Html.ValidationMessageFor(model => model.StringOfJanres)
+                </td>
+                <td>
+                    Используйте Пробел для разделения жанров
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Издание
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Izd)
+                    @Html.ValidationMessageFor(model => model.Izd)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Кол-во страниц
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Numofpages)
+                    @Html.ValidationMessageFor(model => model.Numofpages)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Сколько раз брали книгу
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Howmanytimes)
+                    @Html.ValidationMessageFor(model => model.Howmanytimes)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    На какой полке стоит книга
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Number_s1)
+                    @Html.ValidationMessageFor(model => model.Number_s1)
+                </td>
+                <td>
+                    Укажите цифру от 1 до 3
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Кол-во Авторов
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.NumberOfAuthors)
+                    @Html.ValidationMessageFor(model => model.NumberOfAuthors)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input id="Submit1" type="submit" value="Add Authors for this book" /></td>
+            </tr>
+        </table>
+    </fieldset>
 }
 
 @section Scripts {
-<script src="/Scripts/jquery-1.8.2.js"></script>
+    <script src="/Scripts/jquery-1.8.2.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
-    
+
 }
 
 
 
 
 
-   
+

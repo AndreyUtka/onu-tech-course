@@ -27,7 +27,7 @@
                         <td>@row[col.ColumnName]</td>
                     }
                     <td>
-                        @Html.ActionLink("Удалить", "RemoveReader", "Home", new { rid = @row[0] }, null)
+                        @Html.ActionLink("Удалить", "RemoveReader", "Home", new { rid = @row[0] }, new { onclick = "return confirm('Вы уверенны?');" })
                     </td>
                 </tr>
             }

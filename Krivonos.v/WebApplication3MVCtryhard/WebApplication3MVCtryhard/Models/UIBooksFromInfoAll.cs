@@ -33,14 +33,12 @@ namespace WebApplication3MVCtryhard.Models
             return columns;
         }
     }
+
     public class UIBooksFromInfoAll
     {
         public string Id { get; set; }
-        
-
         public string Name { get; set; }
         public string Year { get; set; }
-        public string Janre { get; set; }
         public string Izd { get; set; }
         public string Numofpages { get; set; }
         public string Howmanytimes { get; set; }
@@ -57,25 +55,25 @@ namespace WebApplication3MVCtryhard.Models
                 }
         }
         public List<UIAuthor> Authors { get; set; }
+        public List<string> Janres { get; set; }
 
         public UIBooksFromInfoAll()
         {
             Id = null;
             Name = null;
             Year = null;
-            Janre = null;
             Izd = null;
             Numofpages = null;
             Howmanytimes = null;
             Number_s1 = null;
             Authors = new List<UIAuthor>();
+            Janres = new List<string>();
         }
         public UIBooksFromInfoAll(BLBook input)
         {
             Id = input.Id;
             Name = input.Name;
             Year = input.Year;
-            Janre = input.Janre;
             Izd = input.Izd;
             Numofpages = input.Numofpages;
             Howmanytimes = input.Howmanytimes;
@@ -84,6 +82,11 @@ namespace WebApplication3MVCtryhard.Models
             foreach (BLAuthor blAuthor in input.Authors)
             {
                 Authors.Add(new UIAuthor(blAuthor));
+            }
+            Janres = new List<string>();
+            foreach (string s in input.Janres)
+            {
+                Janres.Add(s);
             }
         }
         public string[] GetColumns()
@@ -96,7 +99,7 @@ namespace WebApplication3MVCtryhard.Models
         }
         public object[] GetValues()
         {
-            object[] values = { Id, Name, Year, Janre, Izd, Numofpages, Howmanytimes, Number_s1, Authors.Count };
+            object[] values = { Id, Name, Year, Janres[0], Izd, Numofpages, Howmanytimes, Number_s1, Authors.Count };
             return values;
         }
     }

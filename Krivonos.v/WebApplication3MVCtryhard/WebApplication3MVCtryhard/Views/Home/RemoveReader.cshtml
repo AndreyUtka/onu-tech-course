@@ -4,5 +4,12 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>RemoveReader</h2>
-@Model.ToString()
+<h2>Удаление Читателя </h2>
+@if (!Model)
+{
+    <div>У читателя в данный момент находится книга на руках - заберите у него книгу и повторите операцию</div>
+}
+else
+{
+    <div>Операция успешно завершилась</div>
+}

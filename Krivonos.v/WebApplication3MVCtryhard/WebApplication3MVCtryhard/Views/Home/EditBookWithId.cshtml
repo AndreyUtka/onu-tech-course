@@ -1,0 +1,122 @@
+﻿@model LibraryBL.BLBook
+
+@{
+    ViewBag.Title = "EditBookWithId";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@using (Html.BeginForm("SaveBook", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Книга</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Year)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Year)
+            @Html.ValidationMessageFor(model => model.Year)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Izd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Izd)
+            @Html.ValidationMessageFor(model => model.Izd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Numofpages)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Numofpages)
+            @Html.ValidationMessageFor(model => model.Numofpages)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Howmanytimes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Howmanytimes)
+            @Html.ValidationMessageFor(model => model.Howmanytimes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Number_s1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Number_s1)
+            @Html.ValidationMessageFor(model => model.Number_s1)
+        </div>
+
+        @*<div class="editor-label">
+                @Html.LabelFor(model => model.NumberOfAuthors)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NumberOfAuthors)
+                @Html.ValidationMessageFor(model => model.NumberOfAuthors)
+            </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StringOfJanres)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StringOfJanres)
+            @Html.ValidationMessageFor(model => model.StringOfJanres)
+        </div>
+
+        <h3>Авторы : </h3>
+        @{
+    if (Model.Authors.Count > 0)
+    {
+
+        for (int i = 0; i < Model.Authors.Count; i++)
+        {
+            <br />
+            <hr style="color: lightgrey;" />
+                    @Html.HiddenFor(model => model.Authors[i].Id)
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Authors[i].Fullname)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Authors[i].Fullname)
+                        @Html.ValidationMessageFor(model => model.Authors[i].Fullname)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Authors[i].Year)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Authors[i].Year)
+                        @Html.ValidationMessageFor(model => model.Authors[i].Year)
+                    </div>
+                    
+                }
+            }
+        }
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

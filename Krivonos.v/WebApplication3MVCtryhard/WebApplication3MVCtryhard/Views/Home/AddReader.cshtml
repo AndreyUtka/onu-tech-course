@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>AddReader</h2>
 
 @using (Html.BeginForm("AddReaderPost", "Home", FormMethod.Post))
 {
@@ -13,7 +12,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>BLReader</legend>
+        <legend>Читатель</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Name)
@@ -32,11 +31,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AfterName)
+            @Html.LabelFor(model => model.Patronymic)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AfterName)
-            @Html.ValidationMessageFor(model => model.AfterName)
+            @Html.EditorFor(model => model.Patronymic)
+            @Html.ValidationMessageFor(model => model.Patronymic)
         </div>
 
         <p>

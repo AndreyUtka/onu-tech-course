@@ -1,8 +1,15 @@
 ﻿@model bool
 @{
-    ViewBag.Title = "AddReaderPost";
+    ViewBag.Title = "Добавление Читателя";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>AddReaderPost</h2>
-@Model.ToString();
+<h2>Добавления читателя</h2>
+@if (Model)
+{
+    <span>Добавление Читателя в базу данных произошло успешно!</span>
+}
+else
+{
+    <span>Добавление Читателя в базу данных произошло неудачно</span>
+}

@@ -4,5 +4,12 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>TakeCertainBook</h2>
-@Model.ToString()
+<h2>Возврат Книги</h2>
+@if (Model)
+{
+    <span>Возврат книги произошел успешно!</span>
+}
+else
+{
+    <span>Возврат книги произошел неудачно</span>
+}

@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>GiveCertainBook</h2>
-@Model.ToString()
+<h2>Выдача Книги</h2>
+@if (Model)
+{
+    <span>Выдача книги произошла успешно!</span>
+}
+else
+{
+    <span>Выдача книги произошла неудачно</span>
+}
     

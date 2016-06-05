@@ -16,7 +16,8 @@
             {
                 <th>@col</th>
             }
-            @*<th> Детальнее </th>*@
+            <th> Изменить </th>
+            <th> Удалить </th>
         </tr>
     </thead>
     <tbody>
@@ -37,15 +38,30 @@
                     <td>@Book.Id</td>
                     <td>@Book.Name</td>
                     <td>@Book.Year</td>
-                    <td>@Book.Janre</td>
+                    <td>
+                        @foreach (string j in Book.Janres)
+                        {
+                            if (j == Book.Janres[Book.Janres.Count - 1])
+                            {
+                                @(j)
+                            }
+                            else
+                            {
+                                @(j + ' ')
+                            }
+                        }
+                    </td>
                     <td>@Book.Izd</td>
                     <td>@Book.Numofpages</td>
                     <td>@Book.Howmanytimes</td>
                     <td>@Book.Number_s1</td>
                     <td>@Book.Authors.Count</td>
-                    @*<td>
-                        @Html.ActionLink("Детальнее", "SingleBook", "Home", new { bid = @row[0] }, null)
-                    </td>*@
+                    <td>
+                        @Html.ActionLink("Изменить", "EditBookWithId", "Home", new { Id = @Book.Id }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "RemoveSingleBook", "Home", new { bid = @Book.Id }, new { onclick = "return confirm('Вы уверенны?');" })
+                    </td>
                 </tr>
     </tbody>
 </table>

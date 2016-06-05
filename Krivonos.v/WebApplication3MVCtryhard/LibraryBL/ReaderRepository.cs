@@ -24,7 +24,7 @@ namespace LibraryBL
 
         public bool AddReader(BLReader submittedReader)
         {
-            object[] newReader = { submittedReader.Surname, submittedReader.Name, submittedReader.AfterName };
+            object[] newReader = { submittedReader.Surname, submittedReader.Name, submittedReader.Patronymic };
             return dal.AddReader(newReader);
 
         }
