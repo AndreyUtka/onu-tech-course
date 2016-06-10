@@ -14,15 +14,25 @@
             float: right;
         }
     </style>
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+
 </head>
 <body>
     <div id="leftMenu">
-        @Html.ActionLink("Home", "Index", "Home")
+        @Html.ActionLink("Все Книги", "Index", "Home")
         <br />
-        @Html.ActionLink("Add/Remove Books", "AddRemoveBooks", "Home")  
+        @Html.ActionLink("Добавить/Удалить Книги", "AddRemoveBooks", "Home")  
+        <br />
+        @Html.ActionLink("Поиск Книг", "SearchForBook", "Home")
+        <br />
+        @Html.ActionLink("Все Читатели", "Readers", "Home")
+        <br />
+        @Html.ActionLink("Добавить/Удалить Читателей", "AddRemoveReaders", "Home")
+        
     </div>
     <div id="content">
         @RenderBody()
+        @RenderSection("Scripts", false)
     </div>
 </body>
 </html>

@@ -1,0 +1,107 @@
+﻿@model List<UIBooksFromInfoAll>
+@using WebApplication3MVCtryhard.Models; 
+@{
+    ViewBag.Title = "SingleBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Книга :</h2>
+@{
+    string bid = Request.QueryString["bid"];
+}
+<table>
+    <thead>
+        <tr>
+            @foreach (string col in Model[0].GetColumns())
+            {
+                <th>@col</th>
+            }
+            <th> Изменить </th>
+            <th> Удалить </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            UIBooksFromInfoAll Book = new UIBooksFromInfoAll();
+        }
+        @{
+            foreach (UIBooksFromInfoAll book in Model)
+            {
+                if (book.Id == bid)
+                {
+                    Book = book;
+                }
+            }       
+        }
+        
+                <tr>
+                    <td>@Book.Id</td>
+                    <td>@Book.Name</td>
+                    <td>@Book.Year</td>
+                    <td>
+                        @foreach (string j in Book.Janres)
+                        {
+                            if (j == Book.Janres[Book.Janres.Count - 1])
+                            {
+                                @(j)
+                            }
+                            else
+                            {
+                                @(j + ' ')
+                            }
+                        }
+                    </td>
+                    <td>@Book.Izd</td>
+                    <td>@Book.Numofpages</td>
+                    <td>@Book.Howmanytimes</td>
+                    <td>@Book.Number_s1</td>
+                    <td>@Book.Authors.Count</td>
+                    <td>
+                        @Html.ActionLink("Изменить", "EditBookWithId", "Home", new { Id = @Book.Id }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "RemoveSingleBook", "Home", new { bid = @Book.Id }, new { onclick = "return confirm('Вы уверенны?');" })
+                    </td>
+                </tr>
+    </tbody>
+</table>
+
+<h3>Авторы : </h3>
+@{
+    if (Book.Authors.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    @{
+                        foreach (string col in Book.Authors[0].GetColumns())
+                        {
+                            <th>
+                                @col
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (UIAuthor author in Book.Authors)
+                    {
+                        <tr>
+                            <td>
+                                @author.Id
+                            </td>
+                            <td>
+                                @author.Fullname
+                            </td>
+                            <td>
+                                @author.Year
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+}
+

@@ -1,0 +1,79 @@
+﻿@model LibraryBL.BLBook
+@using LibraryBL;
+
+@{
+    ViewBag.Title = "AddAuthorForBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function(){
+        if(@Model.Authors.Count == 0)
+        {
+            $("#SubmitBook").click();
+        }
+    });
+</script>
+<table>
+    @{if (Model.Authors.Count != 0)
+    {
+
+        <tr>
+            <td>
+                Для данной книги @Model.Name , @Model.Year года издания, укажите Автора(ов):
+            </td>
+        </tr>
+    }
+    }
+</table>
+
+    @using (Html.BeginForm("SubmitBook", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        @*@Html.HiddenFor(m => m)*@
+        @Html.HiddenFor(m => m.Name)
+        @Html.HiddenFor(m => m.Year)
+        @Html.HiddenFor(m => m.StringOfJanres)
+        @Html.HiddenFor(m => m.Izd)
+        @Html.HiddenFor(m => m.Numofpages)
+        @Html.HiddenFor(m => m.Howmanytimes)
+        @Html.HiddenFor(m => m.Number_s1)
+        @Html.HiddenFor(m => m.NumberOfAuthors)
+    <fieldset>
+        <legend>Авторы</legend>
+        <table>
+            @for (int i = 0; i < Model.Authors.Count; i++)
+            {
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Authors[i].Fullname)
+                </td>
+                <td>
+                    @Html.EditorFor(m => m.Authors[i].Fullname)
+                    @Html.ValidationMessageFor(model => model.Authors[i].Fullname)
+                </td>
+            </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Authors[i].Year)
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m.Authors[i].Year)
+                        @Html.ValidationMessageFor(model => model.Authors[i].Year)
+                    </td>
+                </tr>
+            }
+        </table>
+        
+    </fieldset>
+        
+        <tr>
+            <td colspan="2"><input id="SubmitBook" onload="ifelseclick()" type="submit" value="Submit Book" /></td>
+        </tr>
+    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

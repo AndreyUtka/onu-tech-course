@@ -1,0 +1,16 @@
+﻿@model bool
+@{
+    ViewBag.Title = "GiveCertainBook";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Выдача Книги</h2>
+@if (Model)
+{
+    <span>Выдача книги произошла успешно!</span>
+}
+else
+{
+    <span>Выдача книги произошла неудачно</span>
+}
+    
