@@ -12,7 +12,7 @@ namespace DormitoryProject.Interfaces
         RoomDAL findByNum(int number);
         IEnumerable<RoomDAL> findByCapacity(int number);
         IEnumerable<RoomDAL> findByState(string state);
-        RoomDAL findStudent(StudentDAL student);
+        RoomDAL findStudent(StudentTicketDAL student);
         IEnumerable<RoomDAL> getAllRooms();
         bool updateState(RoomDAL updatedRoom);
     }

@@ -55,41 +55,57 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessClasses\RoomDAL.cs" />
-    <Compile Include="DataAccessClasses\WorkerDAL.cs" />
-    <Compile Include="DomainObjects\PersonBLL.cs" />
+    <Compile Include="DataAccessClasses\WorkDayDAL.cs" />
+    <Compile Include="DataAccessClasses\WorkerTicketDAL.cs" />
+    <Compile Include="DomainObjects\TicketBLL.cs" />
     <Compile Include="DomainObjects\RoomBLL.cs" />
-    <Compile Include="DomainObjects\StudentBLL.cs" />
-    <Compile Include="InterfacesBLL\IService.cs" />
+    <Compile Include="DomainObjects\StudentTicketBLL.cs" />
+    <Compile Include="DomainObjects\WorkDayBLL.cs" />
+    <Compile Include="DomainObjects\WorkerTicketBLL.cs" />
+    <Compile Include="InterfacesBLL\IUserService.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataAccessClasses\PersonDAL.cs" />
+    <Compile Include="DataAccessClasses\TicketDAL.cs" />
     <Compile Include="InterfacesBLL\IRoomService.cs" />
     <Compile Include="InterfacesBLL\IServiceFactory.cs" />
-    <Compile Include="InterfacesBLL\IStudentService.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Interfaces\IUserRepositoryFactory.cs" />
     <Compile Include="Interfaces\IRoomRepository.cs" />
     <Compile Include="Interfaces\IRoomRepositoryFactory.cs" />
     <Compile Include="PGServer\PGRoomRepository.cs" />
     <Compile Include="PGServer\PGRoomRepositoryFactory.cs" />
-    <Compile Include="PGServer\PGStudentRepositoryFactory.cs" />
-    <Compile Include="PGServer\PGStudentRepostirory.cs" />
+    <Compile Include="PGServer\PGUserRepository.cs" />
+    <Compile Include="PGServer\PGUserRepositoryFactory.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\UserRoomPresenter.cs" />
+    <Compile Include="Presenters\UsersFormPresenter.cs" />
+    <Compile Include="Presenters\WorkDaysFormPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataAccessClasses\StudentDAL.cs" />
-    <Compile Include="ServicesBLL\StudentService.cs" />
-    <Compile Include="ServicesBLL\StudentServiceFactory.cs" />
+    <Compile Include="DataAccessClasses\StudentTicketDAL.cs" />
+    <Compile Include="ServicesBLL\UserService.cs" />
+    <Compile Include="ServicesBLL\UserServiceFactory.cs" />
+    <Compile Include="UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UserRoomForm.Designer.cs">
       <DependentUpon>UserRoomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkDaysForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkDaysForm.Designer.cs">
+      <DependentUpon>WorkDaysForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -103,8 +119,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserRoomForm.resx">
       <DependentUpon>UserRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkDaysForm.resx">
+      <DependentUpon>WorkDaysForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

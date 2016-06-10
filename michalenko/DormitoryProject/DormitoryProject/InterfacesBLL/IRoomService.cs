@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DormitoryProject.InterfacesBLL
 {
-    public interface IRoomService:IService
+    public interface IRoomService
     {
 
     }

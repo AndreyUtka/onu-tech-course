@@ -8,16 +8,16 @@ using DormitoryProject.PGServer;
 using DormitoryProject.ServicesBLL;
 using System.Windows.Forms;
 using Npgsql;
-
+using DormitoryProject.DomainObjects;
 
 namespace DormitoryProject.Presenters
 {
     public class LoginPresenter
     {
-        private string con=string.Empty;
-        private LoginForm form;
-        private readonly IServiceFactory serviceFactory;
-        private readonly IStudentService service;
+        private string roleToSend=string.Empty;
+        private LoginForm form; 
+        private IServiceFactory serviceFactory;
+        private UserService service;
 
         private string login;
         private string password;
@@ -25,19 +25,11 @@ namespace DormitoryProject.Presenters
         private string serial;
         private string number;
 
-        private readonly string STUD_ROLE = "student";
-        private readonly string WORKER_ROLE = "worker";
-        private readonly string KOMENDANT_ROLE = "komendant";
-        private readonly string POSTGRES_ROLE = "postgres";
+        
         public LoginPresenter(LoginForm logform)
         {
             form = logform;
-            con = buildConnectionString(POSTGRES_ROLE);
-            serviceFactory = new StudentServiceFactory(new PGStudentRepositoryFactory(con));
-            service = serviceFactory.getStudentService();
-            
-        }
-
+        }        
         public void checkLogin()
         {
             #region Проверки
@@ -58,38 +50,50 @@ namespace DormitoryProject.Presenters
                 password = form.getPassword();
             }
             #endregion
+
             userType = login.Substring(0, 1);
             serial = login.Substring(1, 2);
             number = login.Substring(3, login.Length-3);
-
-            bool res;
-            res = service.checkPassword(userType, serial, number, password);
-                
-            if(res)
+            bool res = false;
+            if(userType=="С")
             {
-                MessageBox.Show("Вы успешно вошли в систему под именем " + login, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                serviceFactory = new UserServiceFactory(new PGUserRepositoryFactory("student"));
+                service = serviceFactory.getUserService();
+            }
+            else if(userType=="Р")
+            {
+                serviceFactory = new UserServiceFactory(new PGUserRepositoryFactory("worker"));
+                service = serviceFactory.getUserService();
+            }
+            else if (userType == "К")
+            {
+                serviceFactory = new UserServiceFactory(new PGUserRepositoryFactory("komendant"));
+                service = serviceFactory.getUserService();
+            }
+            //валидация ввода логина и пароля
+            res = service.Authentication(userType, serial, number, password);
 
+            if (res)
+            {
+                #region подготовка roleToSend для передачи в следующую форму
                 if (userType.Equals("С"))
                 {
-                    con = buildConnectionString(STUD_ROLE);
+                    roleToSend = "student";
                 }
                 else if(userType.Equals("Р"))
                 {
-                    con = buildConnectionString(WORKER_ROLE);
+                    roleToSend = "worker";
                 }
                 else if(userType.Equals("К"))
                 {
-                    con = buildConnectionString(KOMENDANT_ROLE);
+                    roleToSend = "komendant";
                 }
-                UserRoomForm ur = new UserRoomForm(form,login,con);
+                #endregion
+                UserRoomForm ur = new UserRoomForm(form,login,roleToSend);
                 form.Hide();
                 ur.Show();
             }
 
-        }
-        public string buildConnectionString(string role)
-        {
-            return string.Format("Server = 127.0.0.1; Port=5432;User Id = {0}; Password=0000;Database=dormitory;",role);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace DormitoryProject.PGServer
         }
 
         
-        public RoomDAL findStudent(StudentDAL student)
+        public RoomDAL findStudent(StudentTicketDAL student)
         {
             string searchQuery = "SELECT room_num,room_stage,room_block,room_capacity,room_state FROM room"+
                                  "WHERE room_num=(SELECT room_num FROM accomodation "+
@@ -102,8 +102,8 @@ namespace DormitoryProject.PGServer
             {
                 conn.Open();
                 NpgsqlCommand cmd = new NpgsqlCommand(searchQuery, conn);
-                cmd.Parameters.AddWithValue("@serial", student.uSerial);
-                cmd.Parameters.AddWithValue("@number", student.uNumber);
+                cmd.Parameters.AddWithValue("@serial", student.serial);
+                cmd.Parameters.AddWithValue("@number", student.number);
                 using (NpgsqlDataReader reader = cmd.ExecuteReader())
                 {
                     return fromReaderToRoom(reader);

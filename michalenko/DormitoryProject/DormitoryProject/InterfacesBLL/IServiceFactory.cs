@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DormitoryProject.DomainObjects;
+using DormitoryProject.ServicesBLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace DormitoryProject.InterfacesBLL
 {
     public interface IServiceFactory
     {
-        IStudentService getStudentService();
+        UserService getUserService();
         IRoomService getRoomService();
 
     }

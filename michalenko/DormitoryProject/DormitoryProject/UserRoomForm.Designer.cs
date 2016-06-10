@@ -54,6 +54,7 @@
             this.btnUsers.TabIndex = 2;
             this.btnUsers.Text = "Список пользователей";
             this.btnUsers.UseVisualStyleBackColor = true;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnRooms
             // 

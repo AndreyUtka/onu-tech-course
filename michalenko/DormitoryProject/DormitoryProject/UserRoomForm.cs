@@ -12,12 +12,12 @@ namespace DormitoryProject
 {
     public partial class UserRoomForm : Form
     {
-        UserRoomPresenter URP;
+        UserRoomPresenter presenter;
         LoginForm LF;
         public UserRoomForm(LoginForm lf,string login,string connection)
         {
             InitializeComponent();
-            URP = new UserRoomPresenter(this,login, connection);
+            presenter = new UserRoomPresenter(this,login, connection);
             LF = lf;
         }
 
@@ -30,6 +30,12 @@ namespace DormitoryProject
         {
             LF.resetFields();
             LF.Show();
+        }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            UserForm uf = new UserForm(presenter.getCurrentRole());
+            uf.Show();
         }
     }
 }
